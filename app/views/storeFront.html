@@ -1,0 +1,16 @@
+<h1 id="storeHeading">{{store.name}}</h1>
+<div id="brickColors">{{store.brickColors.length}}</div>
+<ul id="colorList" ng-repeat="color in store.brickColors">
+    <li>{{color}}</li>
+</ul>
+<div ng-repeat="(brickKey, brickValue) in store.bricks">
+    <div id="color-{{brickKey}}" ng-repeat="(colorKey, colorValue) in brickValue">
+        <div class="brick-{{colorKey}}" ng-class="{'low-stock': colorValue.quantity < 10, 'coming-soon': colorValue.quantity < 5}">
+            {{colorKey}}
+            {{colorValue.quantity}}
+            {{colorValue.price}}
+            <button class="buyButton" ng-click="colorValue.quantity = colorValue.quantity - 1">Buy</button>
+            <button class="returnButton" ng-click="colorValue.quantity = colorValue.quantity + 1">Return</button>
+        </div>
+    </div>
+</div>
