@@ -1,16 +1,34 @@
-<h1 id="storeHeading">{{store.name}}</h1>
-<div id="brickColors">{{store.brickColors.length}}</div>
-<ul id="colorList" ng-repeat="color in store.brickColors">
-    <li>{{color}}</li>
-</ul>
-<div ng-repeat="(brickKey, brickValue) in store.bricks">
-    <div id="color-{{brickKey}}" ng-repeat="(colorKey, colorValue) in brickValue">
-        <div class="brick-{{colorKey}}" ng-class="{'low-stock': colorValue.quantity < 10, 'coming-soon': colorValue.quantity < 5}">
-            {{colorKey}}
-            {{colorValue.quantity}}
-            {{colorValue.price}}
-            <button class="buyButton" ng-click="colorValue.quantity = colorValue.quantity - 1">Buy</button>
-            <button class="returnButton" ng-click="colorValue.quantity = colorValue.quantity + 1">Return</button>
+<div class="container">
+    <h1 id="storeHeading">{{store.name}}</h1>
+    <div class="container">
+        <div class="col-md-3">
+            <!-- Single button -->
+            <div class="btn-group">
+                <button id="brickColors" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    {{store.brickColors.length}} Colors <span class="caret"></span>
+                </button>
+                <ul id="colorList" class="dropdown-menu">
+                    <li ng-repeat="color in store.brickColors"><a href="#">{{color}}</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row" ng-repeat="(brickKey, brickValue) in store.bricks">
+                <div id="color-{{brickKey}}" class="col-md-4" ng-repeat="(colorKey, colorValue) in brickValue" style="border: medium double {{brickKey}};">
+                    <div class="brick-{{colorKey}} row" ng-class="{'low-stock': colorValue.quantity < 10, 'coming-soon': colorValue.quantity < 5}">
+                        <div class="col-md-12">
+                            <ul>
+                                <li>Size: {{colorKey}}</li>
+                                <li>Quantity: {{colorValue.quantity}}</li>
+                                <li>Price: {{colorValue.price}}</li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btn btn-default buyButton col-md-6" ng-click="colorValue.quantity = colorValue.quantity - 1">Buy</button>
+                        <button type="button" class="btn btn-default returnButton col-md-6" ng-click="colorValue.quantity = colorValue.quantity + 1">Return</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
